@@ -1,0 +1,61 @@
+version: "3"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3.8.3-management
+    container_name: rabbitmq
+    ports:
+      - "4369:4369"
+      - "5672:5672"
+      - "25672:25672"
+      - "15672:15672"
+    volumes:
+      - "/data/rabbitmq:/var/lib/rabbitmq"
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=admin      
+
+  redis:
+    image: redis:6.2.6
+    container_name: redis
+    environment:
+      - REDIS_PASSWORD=admin
+    command: redis-server --requirepass admin    
+    ports:
+      - "6379:6379"
+    volumes:
+      - "/data/redis:/var/lib/redis"
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    hostname: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=admin 
+    restart: "always"
+    privileged: "true"
+    ports:
+      - "27017:27017" #对外暴露提供服务的端口，正式生产的时候理论不用暴露
+    volumes:
+      - "/data/mongodb/db:/data/db" # 挂载数据目录
+      - "/data/mongodb/log:/var/log/mongodb" # 挂载日志目录
+      - "/data/mongodb/config:/etc/mongo" # 挂载日志目录
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: "always"
+    depends_on:
+      - mongo   
+    links:
+      - mongo:mongo
+    ports:
+      - "8081:8081" #对外暴露提供服务的端口，正式生产的时候理论不用暴露      
+    environment:
+      - ME_CONFIG_OPTIONS_EDITORTHEME=3024-night
+      - ME_CONFIG_MONGODB_SERVER=localhost
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=admin  
+      - ME_CONFIG_BASICAUTH_USERNAME=root
+      - ME_CONFIG_BASICAUTH_PASSWORD=admin 

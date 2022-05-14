@@ -1,0 +1,9 @@
+id,name,domain,department,description,owner,email,phone
+1,"安全自动化工具平台","http://secpf.h3c.com","平台测试部自动化组","安全自动化工具平台","Yinjiaqi","app.secpf@h3c.com","12345678901"
+2,"安全项目管理平台","http://mgmt.secpf.h3c.com","平台测试部自动化组","安全项目管理平台","Yangfan","app.secpf@h3c.com","12345678901"
+3,"安全自动化运维平台","http://iom.secpf.h3c.com","平台测试部自动化组","安安全自动化运维平台","Liudan","app.secpf@h3c.com","12345678901"
+4,"安全自动化文档平台","http://wiki.secpf.h3c.com","平台测试部自动化组","安全自动化文档平台","Wangmin","app.secpf@h3c.com","12345678901"
+5,"安全接口自动化测试平台","http://saat.secpf.h3c.com","平台测试部自动化组","安全接口自动化测试平台","Luokegui","app.secpf@h3c.com","12345678901"
+
+
+                
